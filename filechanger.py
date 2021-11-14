@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import subprocess
 
 def delFile(file):
@@ -32,16 +34,12 @@ def changer(fname):
     p3 = subprocess.Popen(["mv", nname, fname])
     p3.wait()
     p4 = subprocess.Popen(["touch", "-a", "-m", fname])
-    p4.wait()
-    delFile(nname)
     statCheck(fname,i)
 
 def useFile(file, output_file, self_destruct):
     with open(file, "r") as f:
-        j =0
         for line in f:
             print(line)
-            j = +1
             changer(line)
         f.close()
     if self_destruct == True:
